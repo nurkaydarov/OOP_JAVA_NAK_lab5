@@ -10,7 +10,7 @@ public class Main {
 
         final int row = 4;
         final int col = 5;
-        int matrix[][] = new int[row][col];
+        int[][] matrix = new int[row][col];
         int count;
         Preferences reg = Preferences.userRoot().node("nak_oop_lab5");
 
@@ -20,9 +20,7 @@ public class Main {
         System.out.println("Подсчитать количество отрицательных элементов в таблице и увеличить на это значение минимальный и максимальный элементы таблицы");
 
         try {
-            /**
-             * Part 1
-             */
+
 
 
                 for (int i = 0; i < row; i++)
@@ -31,25 +29,22 @@ public class Main {
                         matrix[i][j]= (int) Math.round((Math.random() * 18) - 9);// Генерируем рандомные числа
                         System.out.print(matrix[i][j] + " ");
                     }
-                    System.out.println("");
+                    System.out.println();
                 }
 
 
-            /**
-             * End Part 1
-             */
 
-            /**
+
+            /*
              * Part 2 Алгоритм
              */
-            int mini = 0, minj = 0, maxi = 0, maxj = 0;
-            int max = matrix[maxi][maxj], min = matrix[mini][minj], maxElement = 0, minElement = 0;
+            int mini = 0, min_j = 0, maxi = 0, max_j = 0;
+            int max = matrix[maxi][max_j], min = matrix[mini][min_j], maxElement , minElement ;
 
             int nCount = 0;
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < col; j++) {
-                    //System.out.print(matrix[i][j] + " ");
-                    // Thread.sleep(10);
+
                     count = matrix[i][j];
 
                     if (count < 0) {
@@ -59,12 +54,12 @@ public class Main {
                     if (count < min) {
                         min = matrix[i][j];
                         mini = i;
-                        minj = j;
+                        min_j = j;
                     }
                     if (count > max) {
                         max = matrix[i][j];
                         maxi = i;
-                        maxj = j;
+                        max_j = j;
                     }
                 }
 
@@ -72,9 +67,9 @@ public class Main {
             minElement = nCount + min; // Сумма кол-во отрицательных чисел и минимального элемента в матрице
             maxElement = nCount + max; // Сумма кол-во отрицательных чисел и максимального элемента в матрице
 
-            matrix[maxi][maxj] = maxElement; // И заменяем его на сумму отриц+мин элемента
+            matrix[maxi][max_j] = maxElement; // И заменяем его на сумму отрицательных + мин элемента
 
-            matrix[mini][minj] = minElement;
+            matrix[mini][min_j] = minElement;
 
             System.out.println(" ----- ");
 
@@ -95,7 +90,7 @@ public class Main {
                     count =  reg.getInt("matrix" + i + j, matrix[i][j]);
                     System.out.print(count + " ");
                 }
-                System.out.println("");
+                System.out.println();
             }
 
 
